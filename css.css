@@ -1,0 +1,29 @@
+.layout__body {
+    padding: 0;
+    marign: 0;
+}
+
+.test {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -150px;
+    width: 300px;
+    height: 500px;
+    background: #fcc;
+    box-shadow: 0 0 40px rgba(0, 235, 60, 1);
+    transition: all .3s linear;
+}
+
+.test._mod {
+    margin-top: -150px;
+    margin-left: -250px;
+    width: 500px;
+    height: 300px;
+    border-radius: 130px;
+    background: #ccf;
+    box-shadow: 0 0 8px 15px rgba(255, 56, 12, .9);
+    -webkit-transform: translate3d(10px, 10px, 0), scale(1.2);
+    transform: translate3d(10px, 10px, 0), scale(1.2);
+}

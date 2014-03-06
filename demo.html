@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" class="layout">
+
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="css.css">
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script src="fps.js"></script>
+    <script>
+        fps({
+            iteration: function(cb) {
+                $('.test').addClass('_mod');
+
+                setTimeout(function() {
+                    $('.test').removeClass('_mod');
+                    cb();
+                }, 300);
+            },
+            repeat: 10,
+
+            delta: 300
+        });
+    </script>
+
+    <title>FPS</title>
+</head>
+
+<body class="layout__body">
+
+    <div class="test"></div>
+
+</body>
+</html>

@@ -8,7 +8,8 @@
 
     var last,
         distrib = [],
-        status;
+        status,
+        after;
 
     function max(arr) {
         var max = 0;
@@ -52,15 +53,19 @@
 
         if (status == 'ended') {
             $('body').append('<div id="fps" style="position: fixed; top: 0; right: 0; width: 400px; height: 100px; z-index: 10; background: rgba(255, 255, 255, .7); box-shadow: 0 0 5px rgba(0, 0, 0, .5);">' + 
-                '<textarea class="distrib" style="position: absolute; opacity: .4; width: 20px; background: green; height: 300px; top: 100px; right: 0; font-size: 8px;"></textarea></div>');
+                '<textarea class="distrib" style="position: absolute; opacity: .4; width: 50px; background: green; height: 300px; top: 100px; right: 0; font-size: 8px;"></textarea></div>');
 
             // console.log('distrib', distrib);
-            for (var i = 0 ; i < distrib.length ; i++) {
+            var length = (distrib.length > 100) ? 100 : distrib.length;
+            console.log('length', length);
+            for (var i = 0 ; i < length ; i++) {
                 var val = Math.round(typeof distrib[i] != 'undefined' ? distrib[i] : 0);
 
                 $('#fps .distrib').append(i + "\t" + val + "\n");
             }
             reflow();
+
+            after && after();
         } else {
             raf(tick);
         }
@@ -70,34 +75,34 @@
         var delay = 0 || params.delay,
             repeat = params.repeat || 1,
             delta = 0 || params.delta,
-            interval;
+            after = params.after;
 
-        function trigger() {
-            function step() {
-                params.step();
+        // One iteration
+        function iteration() {
+            // Async or sync iteration callback
+            function callback() {
                 repeat--;
+                
                 if (repeat <= 0) {
-                    clearInterval(interval);
                     status = 'ended';
+                } else {
+                    setTimeout(iteration, delta);
                 }
             }
 
-            interval = setInterval(step, delta);
+            if (params.iteration.length > 0) {
+                params.iteration(callback);
+            } else {
+                params.iteration();
+                callback();
+            }
         }
 
         setTimeout(function() {
+            params.before && params.before();
             status = 'inProgress';
-            trigger();
-            tick(); // will invoke self while status != 'ended'
+            iteration();
+            tick(); // will invoke itself while status != 'ended'
         }, delay);
     };
 })();
-
-fps({
-    delay: 1000,
-    step: function() {
-        $('.dashboard__cityNameLink').trigger('click');
-    },
-    repeat: 50,
-    delta: 600
-});
