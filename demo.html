@@ -4,32 +4,24 @@
 <head>
     <meta charset="utf-8">
 
+    <link rel="stylesheet" href="./node_modules/mocha/mocha.css">
     <link rel="stylesheet" href="css.css">
 
     <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script src="./node_modules/mocha/mocha.js"></script>
+    <script src="./node_modules/chai/chai.js"></script>
+
     <script src="fps.js"></script>
-    <script>
-        fps({
-            iteration: function(cb) {
-                $('.test').addClass('_mod');
-
-                setTimeout(function() {
-                    $('.test').removeClass('_mod');
-                    cb();
-                }, 300);
-            },
-            repeat: 10,
-
-            delta: 300
-        });
-    </script>
+    <script src="tests.js"></script>
 
     <title>FPS</title>
 </head>
 
-<body class="layout__body">
+<body class="fps">
 
-    <div class="test"></div>
+    <div id="mocha"></div>
+
+    <div class="fps__test"></div>
 
 </body>
 </html>

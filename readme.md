@@ -1,4 +1,4 @@
-fps - util for meashurement fps distribution on testcases.
+fps - util for measurement fps distribution on testcases.
 
 ## Demo
 

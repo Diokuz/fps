@@ -1,9 +1,9 @@
-.layout__body {
+.fps {
     padding: 0;
     marign: 0;
 }
 
-.test {
+.fps__test {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -14,9 +14,11 @@
     background: #fcc;
     box-shadow: 0 0 40px rgba(0, 235, 60, 1);
     transition: all .3s linear;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
-.test._mod {
+.fps__test._mod {
     margin-top: -150px;
     margin-left: -250px;
     width: 500px;
